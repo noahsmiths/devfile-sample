@@ -45,7 +45,7 @@ app.get('/metrics', (req, res, next) => {
 app.use(requestTimer);
 
 // Test shibboleth
-app.use(shibboleth);
+// app.use(shibboleth);
 
 // Log routes after here.
 const pino = require('pino')({
