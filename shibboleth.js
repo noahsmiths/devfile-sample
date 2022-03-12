@@ -2,6 +2,9 @@ const shibboleth = (req, res, next) => {
     let headers = req.headers;
     let user = {};
 
+    console.log(headers);
+    console.log(headers["affiliation"]);
+
     if (!headers["displayname"] || !headers["mail"] || !headers["affiliation"] || !headers["sn"] || !headers["givenname"]) {
         res.status(503).send("Error with UNC shibboleth authentication. Please log in again.");
     } else {
