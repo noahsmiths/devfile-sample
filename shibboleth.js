@@ -13,7 +13,7 @@ const shibboleth = (req, res, next) => {
             firstName: headers["givenname"],
             lastName: headers["sn"],
             email: headers["mail"],
-            affiliation: headers["affiliation"].replaceAll("@unc.edu", "").split(";"),
+            affiliation: headers["affiliation"].replace(/@unc.edu/g, "").split(";"),
         }
 
         req.user = user;
