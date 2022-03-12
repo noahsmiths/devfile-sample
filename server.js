@@ -1,6 +1,7 @@
 const Prometheus = require('prom-client')
 const express = require('express');
 const http = require('http');
+const shibboleth = require('./shibboleth');
 
 Prometheus.collectDefaultMetrics();
 
@@ -43,6 +44,9 @@ app.get('/metrics', (req, res, next) => {
 // Time routes after here.
 app.use(requestTimer);
 
+// Test shibboleth
+app.use(shibboleth);
+
 // Log routes after here.
 const pino = require('pino')({
   level: PRODUCTION ? 'info' : 'debug',
@@ -55,10 +59,10 @@ app.get('/', (req, res) => {
   res.send(req.headers);	
 });	
 
-app.get('/test', (req, res) => {	
+app.get('/test2', (req, res) => {	
   // Use req.log (a `pino` instance) to log JSON:	
   req.log.info({message: 'Hello from Node.js Starter Application!'});		
-  res.send(req.headers);	
+  res.send(req.user);	
 });	
 
 app.post('/hello', (req, res) => {	
